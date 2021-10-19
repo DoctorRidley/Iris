@@ -1,5 +1,15 @@
 package models
 
+/**
+ * Iris temporarily stores and verify data
+ * before pushing it to MongoDB
+ * @param sw sepal width
+ * @param sl sepal_length
+ * @param pw petal_width
+ * @param pl petal_length
+ * @param s species
+ */
+
 class Iris(sw: Double, sl: Double, pw: Double, pl: Double, s: String) {
 
     private val sepal_width: Double = sw
