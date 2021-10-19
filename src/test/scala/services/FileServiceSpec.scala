@@ -19,9 +19,7 @@ class FileServiceSpec extends FunSuite {
         target1 :+ new Iris(4.6,3.1,1.5,0.2, "Iris-setosa")
         target1 :+ new Iris(5.0,3.6,1.4,0.2, "Iris-setosa")
 
-        println(test1.File_Data().toString)
-        println(target1.toString)
-        assert(test1.File_Data() == target1)
+        assert(test1.File_Data() sameElements target1)
 
 
         val test2: FileService = new FileService("test2.data")
@@ -37,7 +35,7 @@ class FileServiceSpec extends FunSuite {
         target2 :+ new Iris(6.1,2.9,4.7,1.4,"Iris-versicolor")
         target2 :+ new Iris(5.6,2.9,3.6,1.3,"Iris-versicolor")
 
-        assert(test2.File_Data() == target2)
+        assert(test2.File_Data() sameElements target2)
     }
 
     test("File Data Getter") {
