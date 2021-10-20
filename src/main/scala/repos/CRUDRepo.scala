@@ -8,19 +8,25 @@ object CRUDRepo {
 
     val client: MongoClient = MongoClient()
     val db: MongoDatabase = client.getDatabase("Iris")
-    val iris: MongoCollection[Document] = db.getCollection("iris")
+    val iris: MongoCollection[Document] = db.getCollection("data")
 
     def Create_Iris(i: Iris): Unit = {
 
         val doc: Document = Document(
-            "sepal_width" -> i.Sepal_Width(),
             "sepal_length" -> i.Sepal_Length(),
-            "petal_width" -> i.Petal_Width(),
+            "sepal_width" -> i.Sepal_Width(),
             "petal_length" -> i.Petal_Length(),
+            "petal_width" -> i.Petal_Width(),
             "species" -> i.Species()
         )
 
-        iris.insertOne(doc)
+        val observable: Observable[Completed] = iris.insertOne(doc)
+
+        observable.subscribe(new Observer[Completed] {
+            override def onNext(result: Completed): Unit = {}
+            override def onError(e: Throwable): Unit = {e.printStackTrace()}
+            override def onComplete(): Unit = {}
+        })
     }
 
     def Read_Iris(i: Iris): Iris = {
