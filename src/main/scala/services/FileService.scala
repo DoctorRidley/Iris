@@ -20,9 +20,6 @@ class FileService(path: String) {
         val file = Source.fromResource(path)
         for (iris <- file.getLines()) {
 
-            // Is it really that hard to memorize .add()
-            // or some other function? I hate Scala
-
             val values: Array[String] = iris.split(',')
 
             val new_iris = new Iris(
@@ -35,6 +32,8 @@ class FileService(path: String) {
 
             CRUDRepo.Create_Iris(new_iris)
 
+            // Is it really that hard to memorize .add()
+            // or some other function? I hate Scala
             // Keeping for unit testing purposes
             file_data :+ new_iris
         }
