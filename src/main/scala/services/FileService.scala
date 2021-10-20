@@ -1,6 +1,7 @@
 package services
 
 import models.Iris
+import repos.CRUDRepo
 
 import scala.io.Source
 
@@ -21,16 +22,21 @@ class FileService(path: String) {
 
             // Is it really that hard to memorize .add()
             // or some other function? I hate Scala
-            file_data :+ new Iris(
-                iris(0).toDouble,
-                iris(1).toDouble,
-                iris(2).toDouble,
-                iris(3).toDouble,
-                iris.substring(4)
-            )
-        }
-    }
 
-    def Push_File(): Unit = {
+            val values: Array[String] = iris.split(',')
+
+            val new_iris = new Iris(
+                values(0).toDouble,
+                values(1).toDouble,
+                values(2).toDouble,
+                values(3).toDouble,
+                values(4)
+            )
+
+            CRUDRepo.Create_Iris(new_iris)
+
+            // Keeping for unit testing purposes
+            file_data :+ new_iris
+        }
     }
 }
